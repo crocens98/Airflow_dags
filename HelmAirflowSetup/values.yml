@@ -1,0 +1,13 @@
+dags:
+  git:
+    #ssh://git@example.com:22/REPOSITORY.git
+    url: git@github.com:crocens98/Airflow_dags.git
+    ref: master
+    secret: airflow-git-keys
+    privateKeyName: id_rsa
+    repoHost: github.com
+    repoPort: 22
+
+    gitSync:
+      enabled: true
+      refreshTime: 20
