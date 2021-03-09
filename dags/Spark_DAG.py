@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from airflow import DAG
-from airflow.providers.apache.spark.operators.spark_submit import \
+from airflow.contrib.operators.spark_submit_operator import \
   SparkSubmitOperator
 
 spark_jars_home = '/opt/airflow'
@@ -10,7 +10,7 @@ spark_app_jar = 'SparkApp-1.0-SNAPSHOT.jar'
 default_args = {
   'owner': 'crocens98',
   'depends_on_past': False,
-  'start_date': datetime(2021, 3, 8, tzinfo=local_tz),
+  'start_date': datetime(2021, 3, 8),
   'email': ['crocens98@gmail.com'],
   'email_on_failure': True,
   'email_on_retry': True,

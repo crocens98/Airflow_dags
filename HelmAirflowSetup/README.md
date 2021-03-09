@@ -9,6 +9,7 @@ helm install \
 
 
 
+
 # Connect
 kubectl exec \
   -it \
@@ -16,12 +17,22 @@ kubectl exec \
   --container airflow-web \
   Deployment/airflow-web \
   /bin/bash
+  
+  
+# Create user
+airflow users create \
+          --username admin \
+          --firstname Viktar \
+          --lastname Zinkou \
+          --role Admin \
+          --email viktar_zinkou@epam.com \
+          --password admin 
 
 
 # You will see
    export POD_NAME=$(kubectl get pods --namespace default -l "component=web,app=airflow" -o jsonpath="{.items[0].metadata.name}")
    echo http://127.0.0.1:8080
-   kubectl port-forward --namespace default $POD_NAME 8080:8080
+   kubectl port-forward --namespace default $POD_NAME 8081:8080
 
 # Create Secret with the help of Kubectl
 kubectl create secret generic \
