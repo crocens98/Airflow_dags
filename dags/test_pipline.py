@@ -4,9 +4,6 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 
 
-def print_hello():
-  return 'Hello Wolrd'
-
 dag = DAG('hello_world',
           description='Hello world example',
           schedule_interval='*/1 * * * *',

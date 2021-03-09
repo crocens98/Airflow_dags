@@ -12,3 +12,8 @@ dags:
     gitSync:
       enabled: true
       refreshTime: 20
+
+
+  extraPipPackages:
+    - apache-airflow-providers-apache-spark
+

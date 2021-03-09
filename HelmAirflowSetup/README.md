@@ -33,3 +33,6 @@ kubectl create secret generic \
 
 
 
+# Copy from local to kub airflow
+kubectl cp /mnt/d/bigdata/task9_scheduling/SparkApp/target/SparkApp-1.0-SNAPSHOT.jar $POD_NAME:/opt/airflow -c airflow-web
+
