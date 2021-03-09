@@ -11,9 +11,6 @@ default_args = {
   'owner': 'crocens98',
   'depends_on_past': False,
   'start_date': datetime(2021, 3, 8),
-  'email': ['crocens98@gmail.com'],
-  'email_on_failure': True,
-  'email_on_retry': True,
   'retries': 2,
   'retry_delay': timedelta(minutes=5)
 }

@@ -1,3 +1,12 @@
+# Create Secret with the help of Kubectl
+kubectl create secret generic \
+  airflow-git-keys \
+  --from-file=id_rsa=$HOME/.ssh/id_rsa \
+  --from-file=id_rsa.pub=$HOME/.ssh/id_rsa.pub \
+  --from-file=known_hosts=$HOME/.ssh/known_hosts \
+  --namespace default
+
+
 
 # Deploy
 helm install \
@@ -34,13 +43,6 @@ airflow users create \
    echo http://127.0.0.1:8080
    kubectl port-forward --namespace default $POD_NAME 8081:8080
 
-# Create Secret with the help of Kubectl
-kubectl create secret generic \
-  airflow-git-keys \
-  --from-file=id_rsa=$HOME/.ssh/id_rsa \
-  --from-file=id_rsa.pub=$HOME/.ssh/id_rsa.pub \
-  --from-file=known_hosts=$HOME/.ssh/known_hosts \
-  --namespace default
 
 
 
