@@ -5,7 +5,7 @@ helm install \
  airflow-stable/airflow \
  --version "7.16.0" \
  --namespace "default" \
- --values ./values.yml
+ --values ./values.yaml
 
 
 
