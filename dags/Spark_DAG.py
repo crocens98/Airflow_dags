@@ -25,11 +25,12 @@ bash_task_first = BashOperator(
     bash_command='echo "Before Spark"',
     dag=dag
 )
-sshHook = SSHHook(conn_id='ssh_connection')
+sshHook = SSHHook(ssh_conn_id ='ssh_connection')
 
 password = Variable.get(password_variable)
 spark_task = SSHOperator(
     task_id='spark_task',
+    ssh_hook=sshHook,
     command=f'''docker exec -ti hadoop-container bash
     spark-submit \
     --master yarn \
