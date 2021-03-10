@@ -2,7 +2,8 @@ from datetime import datetime, timedelta
 from airflow.models import Variable
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
-
+from airflow.providers.ssh.operators.ssh import SSHOperator
+from airflow.providers.ssh.hooks.ssh import SSHHook
 password_variable = 'SSH_PASSWORD'
 default_args = {
   'owner': 'crocens98',
@@ -24,13 +25,12 @@ bash_task_first = BashOperator(
     bash_command='echo "Before Spark"',
     dag=dag
 )
-
+sshHook = SSHHook(conn_id='ssh_connection')
 
 password = Variable.get(password_variable)
-spark_task = BashOperator(
+spark_task = SSHOperator(
     task_id='spark_task',
-    bash_command=f'''echo {password} | ssh root@host.docker.internal
-    docker exec -ti hadoop-container bash
+    command=f'''docker exec -ti hadoop-container bash
     spark-submit \
     --master yarn \
     --class by.zinkov.App \
