@@ -49,3 +49,18 @@ airflow users create \
 # Copy from local to kub airflow
 kubectl cp /mnt/d/bigdata/task9_scheduling/SparkApp/target/SparkApp-1.0-SNAPSHOT.jar $POD_NAME:/opt/airflow -c airflow-web
 
+kubectl cp /mnt/d/bigdata/task9_scheduling/SparkApp/target/SparkApp-1.0-SNAPSHOT.jar airflow-worker-0:/opt/airflow -c airflow-worker
+
+kubectl exec \
+  -it \
+   airflow-worker-0 \
+  /bin/bash
+
+
+docker cp /mnt/d/bigdata/task9_scheduling/SparkApp/target/SparkApp-1.0-SNAPSHOT.jar hadoop-container:/
+spark-submit --master spark://hadoop-network:7077 --class by.zinkov.App --packages io.delta:delta-core_2.12:0.7.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 --total-executor-cores 4 --executor-cores 2 --executor-memory 2g --driver-memory 2g --name spark_task /SparkApp-1.0-SNAPSHOT.jar
+
+
+spark-submit --master yarn --class by.zinkov.App --packages io.delta:delta-core_2.12:0.7.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 --total-executor-cores 4 --executor-cores 2 --executor-memory 2g --driver-memory 2g --name spark_task /SparkApp-1.0-SNAPSHOT.jar
+
+spark-submit --master local[1] --class by.zinkov.App --packages io.delta:delta-core_2.12:0.7.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 --total-executor-cores 4 --executor-cores 2 --executor-memory 2g --driver-memory 2g --name spark_task /SparkApp-1.0-SNAPSHOT.jar
