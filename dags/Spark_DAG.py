@@ -29,7 +29,7 @@ bash_task_first = BashOperator(
 password = Variable.get(password_variable)
 spark_task = BashOperator(
     task_id='spark_task',
-    bash_command=f'''echo${password} | ssh root@host.docker.internal
+    bash_command=f'''echo {password} | ssh root@host.docker.internal
     docker exec -ti hadoop-container bash
     spark-submit \
     --master yarn \
