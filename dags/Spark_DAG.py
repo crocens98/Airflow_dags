@@ -33,7 +33,8 @@ spark_task = SSHOperator(
     ssh_hook=sshHook,
     command=f'''docker exec -t hadoop-container bash
     spark-submit \
-    --master yarn \
+    --master spark://hadoop-host:7077 \
+    --deploy-mode cluster \
     --class by.zinkov.App \
     --packages org.apache.spark:spark-avro_2.11:2.4.4 \
     --total-executor-cores 4 \

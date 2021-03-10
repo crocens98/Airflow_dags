@@ -61,6 +61,9 @@ docker cp /mnt/d/bigdata/task9_scheduling/SparkApp/target/SparkApp-1.0-SNAPSHOT.
 spark-submit --master spark://hadoop-network:7077 --class by.zinkov.App --packages io.delta:delta-core_2.12:0.7.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 --total-executor-cores 4 --executor-cores 2 --executor-memory 2g --driver-memory 2g --name spark_task /SparkApp-1.0-SNAPSHOT.jar
 
 
-spark-submit --master yarn --class by.zinkov.App --packages io.delta:delta-core_2.12:0.7.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 --total-executor-cores 4 --executor-cores 2 --executor-memory 2g --driver-memory 2g --name spark_task /SparkApp-1.0-SNAPSHOT.jar
+
+spark-submit --master spark://hadoop-host:7077 --deploy-mode cluster --class by.zinkov.App --packages org.apache.spark:spark-avro_2.11:2.4.4 --total-executor-cores 4 --executor-cores 2 --executor-memory 2g --driver-memory 2g --name spark_task /SparkApp-1.0-SNAPSHOT.jar
+
+spark-submit --master yarn --deploy-mode cluster --class by.zinkov.App --packages io.delta:delta-core_2.12:0.7.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 --total-executor-cores 4 --executor-cores 2 --executor-memory 2g --driver-memory 2g --name spark_task /SparkApp-1.0-SNAPSHOT.jar
 
 spark-submit --master local[1] --class by.zinkov.App --packages io.delta:delta-core_2.12:0.7.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 --total-executor-cores 4 --executor-cores 2 --executor-memory 2g --driver-memory 2g --name spark_task /SparkApp-1.0-SNAPSHOT.jar
