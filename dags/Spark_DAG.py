@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from airflow.models import Variable
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.operators.bash_operator import BashOperator
 
 password_variable = 'SSH_PASSWORD'
 default_args = {
