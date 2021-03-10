@@ -31,8 +31,7 @@ password = Variable.get(password_variable)
 spark_task = SSHOperator(
     task_id='spark_task',
     ssh_hook=sshHook,
-    command=f'''docker exec -t hadoop-container bash
-    spark-submit \
+    command=f'''docker exec  hadoop-container /root/hadoop/spark-2.4.7-bin-hadoop2.7/bin/spark-submit \
     --master spark://hadoop-host:7077 \
     --deploy-mode cluster \
     --class by.zinkov.App \
